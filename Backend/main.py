@@ -16,7 +16,7 @@ class LED(clock.ClockSlave):
         self.pin.value(1 if phase else 0)
 
 
-c = clock.Clock(10)
+c = clock.Clock(1)
 LED(c, 25)
 s = ShiftRegister(8, c, 11, 12, 13, 14, 15)
 c.start()
