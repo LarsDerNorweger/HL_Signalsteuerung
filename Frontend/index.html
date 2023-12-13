@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HL Signalsteuerung</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="content">
+        <h1>HL Signalsteuerung</h1>
+
+        <form id="paramsForm">
+            <label for="type">Type</label><br>
+            <input type="text" name="type" id="formType" value=""><br><br>
+
+
+            <label for="type">Time in seconds</label><br>
+            <input type="number" name="time" id="formTime" value=""><br><br>
+
+            <button onclick="postData()">Send</button>
+        </form>
+    </div>
+</body>
+
+<script src="main.js"></script>
+
+</html>
