@@ -29,8 +29,7 @@ class ShiftRegister(ClockSlave):
         print("set datat", data)
         for i, e in enumerate(data):
             i += 1
-            self.queue.append(
-                [[self.shift, 1], [self.data, e]])  # type: ignore
+            self.queue.append([[self.data, e]])  # type: ignore
             if(i % self.size == 0):
                 self.queue.append([[self.store, 1]])  # type: ignore
         print("set datat", self.queue)
@@ -39,9 +38,11 @@ class ShiftRegister(ClockSlave):
         super().__executeTick(phase)
         self.store.value(0)
         self.data.value(0)
-        self.shift.value(0)
-        if(len(self.queue) > 0 and phase):
+
+        self.shift.value(phase)
+        if(len(self.queue) > 0 and not phase):
             li = self.queue.pop(0)
+            self.data.value(0)
             print('---')
             for pin, val in li:
                 print("pin value:", pin, val)

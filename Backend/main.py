@@ -19,7 +19,9 @@ class LED(clock.ClockSlave):
 c = clock.Clock(1)
 LED(c, 25)
 s = ShiftRegister(8, c, 11, 12, 13, 14, 15)
+#t = ShiftRegister(8, c, 21, 19, 20, 18, 17)
 c.start()
 s.setData([0, 0, 1, 1, 1, 1, 0, 0])
+#t.setData([1, 0, 1, 0, 1, 0, 1, 0])
 while True:
     sleep(1)
