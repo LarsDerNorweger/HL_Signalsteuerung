@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "rollup src/main.js -o build/bundle.js -f cjs",
+    "watch": "rollup --config ./rollup.config.js -w --watch.onEnd \"node ./bundle.js\"",
+    "build": "rollup --config ./rollup.config.js ",
+    "postbuild": "node ./bundle.js",
     "doc": "jsdoc -c jsdoc.json"
   },
   "keywords": [],
@@ -13,5 +16,8 @@
   "devDependencies": {
     "jsdoc": "^4.0.2",
     "rollup": "^4.9.6"
+  },
+  "dependencies": {
+    "typescript": "^5.3.3"
   }
 }

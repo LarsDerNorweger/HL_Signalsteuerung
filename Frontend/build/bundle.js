@@ -1,6 +1,4 @@
-'use strict';
-
-/**
+'use strict';/**
  * function to create html elements dynamically
  * @namespace CreatePage
  */
@@ -37,12 +35,12 @@ function createPage() {
   
   /**
    * helper function to create html elements
-   * @function createHTMLElements
+   * @function create
    * @memberof CreatePage
-   * @param {string} elementtype
-   * @param {Node} target
-   * @param {string} text
-   * @returns {HTMLElement}
+   * @param {string} elementtype - what element should be created
+   * @param {Node} target - where should it be created
+   * @param {string} [text] - innerText for headline, labels etc.
+   * @return {HTMLElement}
   */
  function create(elementtype, target, text) {
    let elem = document.createElement(elementtype);
@@ -50,10 +48,9 @@ function createPage() {
    if (text) elem.innerText = text;
    return elem;
   }
-}
-
-function main() {
+}function main() {
   createPage();
+  console.log("Hello World");
 }
 
 main();
