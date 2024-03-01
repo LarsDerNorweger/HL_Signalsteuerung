@@ -12,6 +12,7 @@
     ],
     "settings": {
         "json.format.enable": true,
-        "json.format.keepLines": true
+        "json.format.keepLines": true,
+        "liveServer.settings.multiRootWorkspaceName": "Frontend"
     }
 }
