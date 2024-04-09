@@ -5,22 +5,17 @@
     - verändenrn des Zustandes
     - aktualiesierung erfplgt durch polling
     -
-     polling erfolgt im 10s tackt => geringste auflöung 10s
+     polling erfolgt im 5s tackt => geringste auflöung 5s
 
 ## Steuerungen 
     Übertragung von signalschaltbildsequenzen
 
 ## Protokollaufbau
 
-### Zustand setzten
-    https://host/apiv1/setSequence?time=1&seq="HB1"
-
-### möglich Zustände erfragen
-    https://host/apiv1/getSequence => get List with all available Signs 
-
-    => Client zeigt nur die an, welche er kennt und welche von Server unterstützt werden
+### Laufzeit
+    https://host/apiv1/time => {timeInSec:number}
 
 ### aktuellen Zustand erfragen
-    https://host/apiv1/getState=> gibt zustand
+    https://host/api/v1/state?data={signal:Signal[],on:boolean} => {shown:Signal, signal:Signal[],on:boolean}
 
 
