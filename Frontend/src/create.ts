@@ -32,7 +32,7 @@ export function createPage() {
 
   //create button in form
   const formButton = create("button", form, "Send");
-  
+
   /**
    * helper function to create html elements
    * @function create
@@ -42,10 +42,10 @@ export function createPage() {
    * @param {string} [text] - innerText for headline, labels etc.
    * @return {HTMLElement}
   */
- function create(elementtype, target, text) {
-   let elem = document.createElement(elementtype);
-   if (target instanceof Node) target.appendChild(elem);
-   if (text) elem.innerText = text;
-   return elem;
+  function create<T extends keyof HTMLElementTagNameMap>(elementtype: T, target?: HTMLElement, text?: string): HTMLElementTagNameMap[T] {
+    let elem = document.createElement(elementtype);
+    if (target instanceof Node) target.appendChild(elem);
+    if (text) elem.innerText = text;
+    return elem;
   }
 }

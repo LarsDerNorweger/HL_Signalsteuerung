@@ -18,7 +18,10 @@
     "rollup": "^4.9.6"
   },
   "dependencies": {
-    "sass": "^1.71.1",
-    "typescript": "^5.3.3"
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup-plugin-esbuild-minify": "^1.1.1",
+    "rollup-plugin-minify": "^1.0.3",
+    "rollup-plugin-sass": "^1.12.21",
+    "tslib": "^2.6.2"
   }
 }

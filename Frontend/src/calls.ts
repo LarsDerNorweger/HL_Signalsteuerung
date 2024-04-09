@@ -20,8 +20,8 @@ window.addEventListener("click", function (e) {
   //* send data to raspy
   async function postData() {
     // get values from input form
-    let formType = document.getElementById("formType").value;
-    let formTime = document.getElementById("formTime").value;
+    let formType = document.getElementById("formType");
+    let formTime = document.getElementById("formTime");
   
     let data = [formType, formTime];
     console.log(data);
