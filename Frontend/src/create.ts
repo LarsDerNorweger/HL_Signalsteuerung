@@ -9,29 +9,57 @@ export function createPage() {
   //set headline
   let headline = create("h1", header, "HL Signalsteuerung");
 
+  //info icon as button
+  let headlineInfo = create("button", header, "Placeholder Info")
+  let infoSpan = create("span", headlineInfo)
+  infoSpan.className = "info"
+  headlineInfo.addEventListener("click", function (e) {
+    //clear landing page
+    document.getElementById("gridDiv").innerHTML = ""
+    
+    //create div and add infos
+    let infoDiv = create("div", document.body)
+    infoDiv.id = "infoDiv"
+    let infoList = create("ul", infoDiv)
+    let authors = create("ul", infoList, "Authoren: deine mutter")
+    let libraries = create("ul", infoList, "Bibliotheken: picocss")
+
+    //clear info div and show landing page again
+    let back = create("button", infoDiv, "Zurück")
+    back.addEventListener("click", function (e) {
+      document.getElementById("infoDiv").innerHTML = ""
+    })
+  })
+
+
+  //create grid div
+  let gridDiv = create("div", document.body)
+  gridDiv.className = "grid"
+  gridDiv.id = "gridDiv"
+
+  //create output div
+  let outputDiv = create("div", gridDiv)
+  let svgPlaceholder = create("h3", outputDiv, "HIER KOMMT DIE SVG HIN")
+
+  //create input div
+  let inputDiv = create("div", gridDiv)
+
   //create element for form
-  let form = create("form", document.body);
+  let form = create("form", inputDiv);
 
   //create inputs + labels
   //TODO: write helper function
-  let labelType = create("label", form, "Type");
-  let inputType = create("input", form);
-  inputType.id = "type";
-  inputType.type = "text";
-  labelType.htmlFor = inputType.id;
+  // let labelType = create("label", form, "Type");
+  // let inputType = create("input", form);
+  // inputType.id = "type";
+  // inputType.type = "text";
+  // labelType.htmlFor = inputType.id;
 
-  let br = create("br", form);
-
-  let labelTime = create("label", form, "Time");
-  let inputTime = create("input", form);
-  inputTime.id = "time";
-  inputTime.type = "text";
-  labelTime.htmlFor = inputTime.id;
-
-  let br2 = create("br", form);
-
-  //create button in form
-  const formButton = create("button", form, "Send");
+  //create buttons in form
+  const btHP0 = create("button", form, "HP0");
+  const btHP1 = create("button", form, "HP1");
+  const btHP2 = create("button", form, "HP2");
+  const btAdd = create("button", form, "+")
 
   /**
    * helper function to create html elements
