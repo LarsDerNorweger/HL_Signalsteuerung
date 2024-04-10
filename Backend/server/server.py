@@ -11,15 +11,16 @@ import io
 import shutil
 import function.function
 from  function.WebSite import getSite
-
-PORT = 8001
+from html import unescape
+PORT = 8000
 http.server.SimpleHTTPRequestHandler
 
 class Handler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         print(self.headers.get_filename())
         self.send_response(http.HTTPStatus.OK)
-        (mime,res) = function.function.process_get(self.path)
+        print(self.__dict__)
+        (mime,res) = function.function.process_get(*get_param(self.path))
         self.send_header("Content-type", mime)
         encoded =  res.encode(sys.getfilesystemencoding(), 'surrogateescape')
         f = io.BytesIO()
@@ -28,6 +29,19 @@ class Handler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
         shutil.copyfileobj(f, self.wfile)
         f.close()
+
+def get_param(path:str):
+    if path.find("?")<0:
+        return (path,{})
+    (path,param) = path.split("?")
+
+    res = {}
+    for p in param.split(" "):
+        k,v = p.strip().split("=")
+        v = None if v == "" else unescape(v.strip())    
+        res[k.strip()] = v; 
+    
+    return (path,res)
 
 
 
