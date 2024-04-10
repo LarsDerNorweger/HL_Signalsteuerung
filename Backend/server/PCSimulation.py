@@ -10,8 +10,10 @@ import sys
 import io
 import shutil
 import function.function
+import time , sched
 from  function.WebSite import getSite
 from html import unescape
+from threading import Thread
 PORT = 8000
 http.server.SimpleHTTPRequestHandler
 
@@ -43,6 +45,14 @@ def get_param(path:str):
     
     return (path,res)
 
+
+scet = {}
+def scetule(function,timeInS):
+    t = time.time()+timeInS
+    if(scet[t]is not None):
+        scet[t].append(function)
+    else: scet[t] = [function]
+    
 
 
 with socketserver.TCPServer(("localhost", PORT), Handler) as httpd:
