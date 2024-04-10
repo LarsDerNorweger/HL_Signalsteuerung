@@ -12,6 +12,7 @@ import shutil
 import function.function
 import time , sched
 from  function.WebSite import getSite
+from function.logic import Logic
 from html import unescape
 from threading import Thread
 PORT = 8000
@@ -49,11 +50,29 @@ def get_param(path:str):
 scet = {}
 def scetule(function,timeInS):
     t = time.time()+timeInS
-    if(scet[t]is not None):
-        scet[t].append(function)
+    v = scet.get(t)
+    if(v is not None):
+        v.append(function)
     else: scet[t] = [function]
-    
 
+def performScetule():
+    global scet
+    while(True):
+        time.sleep(.1)
+        t = time.time()
+        stamps = list(filter(lambda x:x<=t,scet.keys())) 
+        for s in stamps:
+            for cb in scet[s]:
+                cb() 
+            scet.__delitem__(s)
+
+def show(signal:str):
+    print("SHOW",signal)
+
+th = Thread(target=performScetule)
+th.start()
+
+logic = Logic(show,scetule)
 
 with socketserver.TCPServer(("localhost", PORT), Handler) as httpd:
     print("serving at port", PORT)
