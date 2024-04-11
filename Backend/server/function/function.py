@@ -8,7 +8,7 @@ import function.WebSite as WebSite
 import function.api as API
 from  function.logic import Logic
 
-from json import dumps,loads
+from json import dumps
 def process_get(path:str,parameters:dict,logic:Logic):
     path = path[1:]
     print("Param",parameters)
@@ -18,6 +18,10 @@ def process_get(path:str,parameters:dict,logic:Logic):
         return ("text/html",WebSite.getSite())
     
     if(path == "api/v1/state"):
-        return ("text/json",dumps(API.get_state(logic).__dict__))
+        d = parameters.get("data")
+        if d  is not None:
+            
+            return ("text/json",dumps(API.set_state(d.replace('%22','"'),logic).__dict__))
+        else: return ("text/json",dumps(API.get_state(logic).__dict__))
     
     return ("text/plain","Test") 

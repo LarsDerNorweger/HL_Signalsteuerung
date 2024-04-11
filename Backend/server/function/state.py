@@ -5,11 +5,11 @@
 #
 
 class State(object):
-    signals:str
+    signals:str = []
     signal:str
     on:bool
 
-    def __init__(self,signal = None,signals = None, on = False):
+    def __init__(self,signal = None,signals = [], on = False):
         self.signals = signals
         self.signal = signal
         self.on = on
