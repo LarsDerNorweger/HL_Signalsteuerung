@@ -5,17 +5,19 @@
 export function createPage() {
   //create element for headline
   let header = create("header", document.body);
+  header.id = "header"
 
   //set headline
   let headline = create("h1", header, "HL Signalsteuerung");
 
   //info icon as button
-  let headlineInfo = create("button", header, "Placeholder Info")
-  let infoSpan = create("span", headlineInfo)
-  infoSpan.className = "info"
+  let headlineInfo = create("img", header)
+  headlineInfo.src = "./images/info.svg"
+  headlineInfo.className = "info"
+
   headlineInfo.addEventListener("click", function (e) {
     //clear landing page
-    document.getElementById("gridDiv").innerHTML = ""
+    document.getElementById("gridDiv").remove()
     
     //create div and add infos
     let infoDiv = create("div", document.body)
@@ -27,7 +29,9 @@ export function createPage() {
     //clear info div and show landing page again
     let back = create("button", infoDiv, "Zurück")
     back.addEventListener("click", function (e) {
-      document.getElementById("infoDiv").innerHTML = ""
+      document.getElementById("infoDiv").remove()
+      document.getElementById("header").remove()
+      createPage()
     })
   })
 
@@ -39,7 +43,7 @@ export function createPage() {
 
   //create output div
   let outputDiv = create("div", gridDiv)
-  let svgPlaceholder = create("h3", outputDiv, "HIER KOMMT DIE SVG HIN")
+  let svgPlaceholder = create("h3", outputDiv, "hier soll eine leere lichttafel hin")
 
   //create input div
   let inputDiv = create("div", gridDiv)
@@ -54,10 +58,24 @@ export function createPage() {
   // inputType.id = "type";
   // inputType.type = "text";
   // labelType.htmlFor = inputType.id;
+  
+  window.addEventListener("click", function (e) {
+    e.preventDefault()
+  })
 
   //create buttons in form
   const btHP0 = create("button", form, "HP0");
+  btHP0.addEventListener("click", function (e) {
+    let hp0 = create("img", outputDiv)
+    hp0.src = "./images/hp0.svg"
+  })
+ 
   const btHP1 = create("button", form, "HP1");
+  btHP1.addEventListener("click", function (e) {
+    let hp1 = create("img", outputDiv)
+    hp1.src = "./images/hp1.svg"
+  })
+
   const btHP2 = create("button", form, "HP2");
   const btAdd = create("button", form, "+")
 
