@@ -9,7 +9,7 @@ from  function.state  import State
 class Logic:
     
 
-    state =State("H1",["H1","H2","H3"])
+    state =State()
 
     def __init__(self,show,scetule) -> None:
         self.show = show
@@ -17,6 +17,10 @@ class Logic:
         self.perform_update()
 
     def perform_update(self):
+        if not self.state.on:
+            self.show("")
+            return
+        
         self.scetule(self.perform_update,10)
         l = len(self.state.signals)
         if l <= 1:
@@ -31,7 +35,9 @@ class Logic:
 
 
     def set_state(self,state:State):
-        self.state = state
+        state.normalize()
+        state.check_state()
+        self.state.merge(state)
         self.perform_update()
         pass
 

@@ -13,14 +13,18 @@ def get_state(logic:Logic):
 def set_state(data:str,logic:Logic):
     tmp:dict = loads(data)
     s = State()
+    print(tmp)
+
     for i in s.__dict__.keys():
         t = tmp.get(i)
         if t is not None:
             s.__dict__[i]  = t
-
-    print(s)
-    logic.set_state(s)
-    return logic.get_state()
+    try:
+        logic.set_state(s)
+        return logic.get_state()
+    except Exception:
+        return s.merge(logic.get_state())
+    
 
 
 def get_run_time():
