@@ -2,7 +2,14 @@
  * function to create html elements dynamically
  * @namespace CreatePage
  */
+
+import { getRuntime } from "./calls";
+
 export function createPage() {
+  window.addEventListener("click", function (e) {
+    e.preventDefault()
+  })
+
   //create element for headline
   let header = create("header", document.body);
   header.id = "header"
@@ -26,6 +33,11 @@ export function createPage() {
     let authors = create("ul", infoList, "Authoren: deine mutter")
     let libraries = create("ul", infoList, "Bibliotheken: picocss")
 
+    //? get current runtime and display it
+    // let currentRuntime = getRuntime().timInSec
+    // console.log(currentRuntime)
+    // let runtime = create("ul", infoList, currentRuntime)
+
     //clear info div and show landing page again
     let back = create("button", infoDiv, "Zurück")
     back.addEventListener("click", function (e) {
@@ -35,7 +47,6 @@ export function createPage() {
     })
   })
 
-
   //create grid div
   let gridDiv = create("div", document.body)
   gridDiv.className = "grid"
@@ -44,25 +55,14 @@ export function createPage() {
   //create output div
   let outputDiv = create("div", gridDiv)
   let svgPlaceholder = create("h3", outputDiv, "hier soll eine leere lichttafel hin")
+  svgPlaceholder.id = "placeholder"
 
   //create input div
   let inputDiv = create("div", gridDiv)
 
   //create element for form
   let form = create("form", inputDiv);
-
-  //create inputs + labels
-  //TODO: write helper function
-  // let labelType = create("label", form, "Type");
-  // let inputType = create("input", form);
-  // inputType.id = "type";
-  // inputType.type = "text";
-  // labelType.htmlFor = inputType.id;
   
-  window.addEventListener("click", function (e) {
-    e.preventDefault()
-  })
-
   //create buttons in form
   const btHP0 = create("button", form, "HP0");
   btHP0.addEventListener("click", function (e) {
