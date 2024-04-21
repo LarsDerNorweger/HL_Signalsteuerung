@@ -6,6 +6,9 @@ export async function getRuntime() {
 }
 
 // get current shown state and if its on or not
+//!!!!!!!!!TODO DIESER CODE IST NICHT LAUFFÄHIG!!!!!!
+// falls im server ein Fehler vorliegt kann auch ein leerstring zurück kommen!!!!!!!!!!!!!!!!!!!
+// beachte die FEHLERAUSGABE!!!!!!!!!!!!!!!!!!!! 
 async function getState() {
   let response = await fetch("https://host/api/v1/state?data={signal:Signal[],on:boolean}")
   let state = await response.json()
