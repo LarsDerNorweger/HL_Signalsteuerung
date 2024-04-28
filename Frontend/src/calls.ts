@@ -1,43 +1,63 @@
+import { SignalData } from "./create"
+
 // get current raspy runtime  
-export async function getRuntime() {
-  let response = await fetch("https://host/apiv1/time")
-  let runtime = await response.json()
-  return runtime
+export async function getRuntime() {  
+  await fetch("https://host/apiv1/time")
+  
+  .then((response) => response.json())
+  
+  .then((response) => {
+    if(Object.keys(response).length === 0) throw new Error("empty object")
+      else return response.timeinSec
+  })
+
+  .then((json) => console.log(json))
+
+  .catch((error) => console.log(error))
+}
+
+//function to check if data respects interface
+function isValid(value: SignalData): value is SignalData {
+  if(value.shown && value.signal && value.on) return true
 }
 
 // get current shown state and if its on or not
-//!!!!!!!!!TODO DIESER CODE IST NICHT LAUFFÄHIG!!!!!!
-// falls im server ein Fehler vorliegt kann auch ein leerstring zurück kommen!!!!!!!!!!!!!!!!!!!
-// beachte die FEHLERAUSGABE!!!!!!!!!!!!!!!!!!!! 
-async function getState() {
-  let response = await fetch("https://host/api/v1/state?data={signal:Signal[],on:boolean}")
-  let state = await response.json()
-  return state
+export async function getState() {
+  await fetch("https://host/api/v1/state?data={signal:Signal[],on:boolean}")
+  
+  .then((response) => response.json())
+
+  .then((response) => {
+    if (!isValid(response)) throw new Error("data invalid")
+      else return response
+  })
+  
+  .then((json) => console.log(json))
+  
+  .catch((error) => console.log(error))
 }
 
+
 // send data to raspy
-// async function postData() {
-//   // get values from input form
-//   let formType = document.getElementById("formType");
-//   let formTime = document.getElementById("formTime");
+export async function postData(data) {
 
-//   let data = [formType, formTime];
-//   console.log(data);
+  await fetch("", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
 
-//   //manually update url because page doesnt reload
-//   window.history.replaceState(
-//     null,
-//     document.title,
-//     "/Frontend/index.html?type=" + data[0] + "&time=" + data[1]
-//   );
+  .then((response) => {
+    console.log(response)
+    if(response.ok) {
+      return response.json()
+    }
+    else return Promise.reject(new Error("couldnt send data"))
+  })
 
-//   let test = await fetch("", {
-//     method: "POST",
-//     headers: {
-//       // "Content-Type": "application/x-www-form-urlencoded",
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(data),
-//   });
-//   console.log(test);
-// }
+  .then((data) => {
+    console.log(data)
+  })
+}
