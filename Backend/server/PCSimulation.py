@@ -12,6 +12,7 @@ import shutil
 import function.function
 import time , sched
 from  function.WebSite import getSite
+from function.PicoWRegLogicImp import showSignal
 from function.logic import Logic
 from html import unescape
 from threading import Thread
@@ -40,6 +41,9 @@ def performScetule():
 
 def show(signal:str):
     print("SHOW",signal)
+    # uncomment when running on PicoW
+    #showSignal(signal)
+
 
 
 class Handler(http.server.BaseHTTPRequestHandler):
